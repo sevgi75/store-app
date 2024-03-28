@@ -38,30 +38,41 @@ app.use(
 );
 /* ------------------------------------------------------- */
 // Middlewares:
-app.use(require("./src/middlewares/findSearchSortPage"))
+
+//* Cors integration
+const getCors = require("./src/middlewares/getCors");
+const postCors = require("./src/middlewares/postCors");
+
+// find search sort page: rotes ların üstünde olmalı.
+app.use(require("./src/middlewares/findSearchSortPage"));
 /* ------------------------------------------------------- */
 // Routes:
 // HomePath:
 app.all("/", (req, res) => {
-    res.send({
-      error: false,
-      message: "Welcome to PERSONNEL API",
-      session: req.session,
-      isLogin: req.isLogin,
-    });
+  res.send({
+    error: false,
+    message: "Welcome to PERSONNEL API",
+    session: req.session,
+    isLogin: req.isLogin,
   });
-  
+});
+
 /* ------------------------------------------------------- */
 // Routes operations:
-app.use(require("./src/routes/productsRoutes"))
-app.use("/users", require("./src/routes/userRoutes"))
-/* ------------------------------------------------------- */
-/* ------------------------------------------------------- */
-/* ------------------------------------------------------- */
+app.use(require("./src/routes/productsRoutes"));
+app.use("/users", require("./src/routes/userRoutes"));
+app.use("/admin", require("./src/routes/adminRoutes"));
+
 /* ------------------------------------------------------- */
 //errorHandler:
-app.use(require("./src/errorHandler"))
+app.use(require("./src/errorHandler"));
 
 /* ------------------------------------------------------- */
 // Running Server:
-app.listen(PORT, () => console.log(`Server Running on http://127.0.0.1:${PORT}`));
+app.listen(PORT, () =>
+  console.log(`Server Running on http://127.0.0.1:${PORT}`)
+);
+
+/* ------------------------------------------------------- */
+// Syncronization
+// require("./src/helpers/sync");
