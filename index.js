@@ -75,4 +75,4 @@ app.listen(PORT, () =>
 
 /* ------------------------------------------------------- */
 // Syncronization
-// require("./src/helpers/sync");
+require("./src/helpers/sync");

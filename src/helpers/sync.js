@@ -26,7 +26,11 @@ async function seedDatabase() {
     users.push({ email, password });
   }
   // admin kullanıcısını da ekleyelim
-  users.unshift({ email: "sevgi@se.com", password: "sevgi", isAdmin: true });
+  users.unshift({
+    email: "user@example.com",
+    password: "example",
+    isAdmin: true,
+  });
   console.log(users);
 
   // Kategorileri oluşturun
